@@ -3,7 +3,8 @@
 
   ],
   "news": {
-    "NEWS.md": "5950"
+    "NEWS.md": "11866",
+    "lazyvim": false
   },
-  "version": 6
+  "version": 8
 }
