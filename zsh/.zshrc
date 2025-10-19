@@ -179,7 +179,7 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
- Shell integrations
+# Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
