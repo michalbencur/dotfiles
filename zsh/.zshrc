@@ -24,7 +24,6 @@ bindkey "^E" end-of-line
 bindkey "^F" forward-char
 bindkey "^G" send-break
 bindkey "^H" backward-delete-char
-bindkey "^I" fzf-completion
 bindkey "^J" accept-line
 bindkey "^K" kill-line
 bindkey "^L" clear-screen
@@ -33,9 +32,7 @@ bindkey "^N" history-search-forward
 bindkey "^O" accept-line-and-down-history
 bindkey "^P" history-search-backward
 bindkey "^Q" push-line
-bindkey "^R" fzf-history-widget
 bindkey "^S" history-incremental-search-forward
-bindkey "^T" fzf-file-widget
 bindkey "^U" kill-whole-line
 bindkey "^V" quoted-insert
 bindkey "^W" backward-kill-word
@@ -131,7 +128,6 @@ bindkey "^[[D" backward-char
 bindkey "^[_" insert-last-word
 bindkey "^[a" accept-and-hold
 bindkey "^[b" backward-word
-bindkey "^[c" fzf-cd-widget
 bindkey "^[d" kill-word
 bindkey "^[f" forward-word
 bindkey "^[g" get-line
