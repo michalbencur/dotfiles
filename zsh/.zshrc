@@ -12,10 +12,6 @@ autoload -Uz compinit && compinit
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
-bindkey "^[[1;3C" forward-word
-bindkey "^[[1;3D" backward-word
-
 bindkey "^@" set-mark-command
 bindkey "^A" beginning-of-line
 bindkey "^B" backward-char
@@ -183,17 +179,26 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# Various
-export EDITOR=nvim
-
-# Shell integrations
+ Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
-# bun
+# Prompt with Git status
+autoload -Uz vcs_info
+precmd() {
+  vcs_info
+}
+zstyle ':vcs_info:git:*' formats '%F{green}%b '
+setopt prompt_subst
+PS1='%F{blue}%~ ${vcs_info_msg_0_}%(?.%F{green}.%F{red})%#%f '
+
+# Various
+export EDITOR=nvim
+
+# Bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# opencode
+# OpenCode
 export PATH=$HOME/.opencode/bin:$PATH
