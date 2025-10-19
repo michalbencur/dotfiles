@@ -185,12 +185,24 @@ eval "$(zoxide init --cmd cd zsh)"
 
 # Prompt with Git status
 autoload -Uz vcs_info
-precmd() {
-  vcs_info
-}
-zstyle ':vcs_info:git:*' formats '%F{green}%b '
+autoload -Uz add-zsh-hook
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats '%r$%b$%S' # repository/branch
 setopt prompt_subst
-PS1='%F{blue}%~ ${vcs_info_msg_0_}%(?.%F{green}.%F{red})%#%f '
+vcs_precmd() {
+    vcs_info
+
+    if [[ -n "$vcs_info_msg_0_" ]]; then
+        parts=(${(@s:$:)vcs_info_msg_0_})
+        psvar[1]="$parts[1]:"
+        psvar[2]="$parts[2]"
+        psvar[3]="$parts[3]"
+    else
+        PSVAR=""
+    fi
+}
+add-zsh-hook precmd vcs_precmd
+PS1='%K{238}%F{blue}%1v%F{green}%2v%F{blue}%(3V$ %3v $%2~ )%(?.%F{green}.%F{red})%#%k%f%F{238}%f '
 
 # Various
 export EDITOR=nvim
