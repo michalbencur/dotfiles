@@ -4,6 +4,10 @@ font-family = MesloLGS Nerd Font Mono
 # window-decoration = false
 macos-titlebar-style = hidden
 
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = clipboard
+
 keybind = super+p>p=toggle_split_zoom
 keybind = super+p>n=new_split:right
 keybind = super+p>shift+n=new_split:down
