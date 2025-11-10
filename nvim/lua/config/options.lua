@@ -11,6 +11,13 @@ vim.opt.shiftwidth = 4
 vim.schedule(function()
   vim.opt.clipboard:append("unnamedplus")
 
+  local function paste()
+    return {
+      vim.fn.split(vim.fn.getreg(""), "\n"),
+      vim.fn.getregtype(""),
+    }
+  end
+
   vim.g.clipboard = {
     name = "OSC 52",
     copy = {
@@ -18,8 +25,11 @@ vim.schedule(function()
       ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
     },
     paste = {
-      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+      -- WezTerm does not allow to read clipboard via OSC 52
+      -- ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+      -- ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+      ["+"] = paste,
+      ["*"] = paste,
     },
   }
 end)
