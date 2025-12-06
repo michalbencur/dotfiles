@@ -67,13 +67,24 @@ return {
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
+    dependencies = { "saghen/blink.cmp" },
     opts = {
       ---@type lspconfig.options
       servers = {
         -- pyright will be automatically installed with mason and loaded with lspconfig
         pyright = {},
       },
+      keymap = { preset = "default" },
+      appearance = {
+        nerd_font_variant = "mono",
+      },
+      completion = { documentation = { auto_show = false } },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
     },
+    config = function()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      require("lspconfig").lua_ls.setup({ capabilities = capabilities })
+    end,
   },
 
   -- add tsserver and setup with typescript.nvim instead of lspconfig
