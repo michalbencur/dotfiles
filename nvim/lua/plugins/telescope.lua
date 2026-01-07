@@ -1,29 +1,17 @@
-return {
-  {
-    "nvim-telescope/telescope.nvim",
-    keys = {
-      {
-        "<leader>fp",
-        function()
-          require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root })
-        end,
-        desc = "Find Plugin File",
-      },
-    },
-    opts = {
-      defaults = {
-        layout_strategy = "horizontal",
+vim.pack.add({ "https://github.com/nvim-lua/plenary.nvim.git" })
+vim.pack.add({ "https://github.com/nvim-telescope/telescope.nvim.git" })
+
+require('telescope').setup({
+    defaults = {
         layout_config = {
-          horizontal = {
-            prompt_position = "top",
-            width = { padding = 0 },
-            height = { padding = 0 },
-            preview_width = 0.5,
-          },
+            width = 0.9,
+            height = 0.9
         },
-        sorting_strategy = "ascending",
-        winblend = 0,
-      },
-    },
-  },
-}
+    }
+})
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>,', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tags' })

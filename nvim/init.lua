@@ -1,2 +1,14 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+require('core.globals')
+require('core.options')
+require('core.keymap')
+require('core.autocmd')
+require('core.lsp')
+
+require('plugins.mason')
+require('plugins.nvim-lspconfig')
+require('plugins.nvim-treesitter')
+require('plugins.colorscheme')
+require('plugins.telescope')
+require('plugins.nvim-tree')
+require('plugins.lualine')
+require('plugins.lazygit')
