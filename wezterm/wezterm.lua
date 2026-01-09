@@ -1,16 +1,41 @@
 local function color_scheme_for_appearance(appearance)
-	if appearance:find("Dark") then
-		return "Catppuccin Mocha"
-	else
-		return "Catppuccin Mocha"
-	end
+    if appearance:find("Dark") then
+        return "Catppuccin Mocha"
+    else
+        return "Catppuccin Mocha"
+    end
 end
 
 local wezterm = require("wezterm")
 
 local config = {}
 if wezterm.config_builder then
-	config = wezterm.config_builder()
+    config = wezterm.config_builder()
+end
+
+function string:endswith(suffix)
+    return self:sub(-(#suffix)) == suffix
+end
+
+local function cursor_fingerprint(pane)
+    local cursor = pane:get_cursor_position()
+    return (cursor.x << 16) | cursor.y
+end
+
+local function move_pane_action(direction)
+    local action = wezterm.action.ActivatePaneDirection(direction)
+    return wezterm.action_callback(function(win, pane)
+        if pane:get_foreground_process_name():endswith('nvim') then
+            local pp = cursor_fingerprint(pane)
+            win:perform_action(wezterm.action.SendKey { key = direction .. 'Arrow', mods = 'OPT' }, pane)
+            wezterm.sleep_ms(120)
+            if pp == cursor_fingerprint(pane) then
+                win:perform_action(action, pane)
+            end
+        else
+            win:perform_action(action, pane)
+        end
+    end)
 end
 
 -- config.font = wezterm.font("Anonymous Pro")
@@ -23,83 +48,83 @@ config.native_macos_fullscreen_mode = false
 
 config.leader = { key = "p", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
-	{
-		key = "n",
-		mods = "LEADER",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "n",
-		mods = "LEADER|SHIFT",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "p",
-		mods = "LEADER",
-		action = wezterm.action.TogglePaneZoomState,
-	},
+    {
+        key = "n",
+        mods = "LEADER",
+        action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+    },
+    {
+        key = "n",
+        mods = "LEADER|SHIFT",
+        action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+    },
+    {
+        key = "p",
+        mods = "LEADER",
+        action = wezterm.action.TogglePaneZoomState,
+    },
 
-	-- Navigate panes
-	{
-		key = "RightArrow",
-		mods = "CMD",
-		action = wezterm.action.ActivatePaneDirection("Right"),
-	},
-	{
-		key = "LeftArrow",
-		mods = "CMD",
-		action = wezterm.action.ActivatePaneDirection("Left"),
-	},
-	{
-		key = "UpArrow",
-		mods = "CMD",
-		action = wezterm.action.ActivatePaneDirection("Up"),
-	},
-	{
-		key = "DownArrow",
-		mods = "CMD",
-		action = wezterm.action.ActivatePaneDirection("Down"),
-	},
+    -- Navigate panes
+    {
+        key = "RightArrow",
+        mods = "CMD",
+        action = move_pane_action("Right"),
+    },
+    {
+        key = "LeftArrow",
+        mods = "CMD",
+        action = move_pane_action("Left"),
+    },
+    {
+        key = "UpArrow",
+        mods = "CMD",
+        action = move_pane_action("Up"),
+    },
+    {
+        key = "DownArrow",
+        mods = "CMD",
+        action = move_pane_action("Down"),
+    },
 
-	-- Send "CTRL-P" to the terminal when pressing CTRL-P, CTRL-P
-	{
-		key = "p",
-		mods = "LEADER|CTRL",
-		action = wezterm.action.SendKey({ key = "p", mods = "CTRL" }),
-	},
+    -- Send "CTRL-P" to the terminal when pressing CTRL-P, CTRL-P
+    {
+        key = "p",
+        mods = "LEADER|CTRL",
+        action = wezterm.action.SendKey({ key = "p", mods = "CTRL" }),
+    },
 
-	-- resize pane
-	{
-		key = "r",
-		mods = "LEADER",
-		action = wezterm.action.ActivateKeyTable({
-			name = "resize_pane",
-			one_shot = false,
-		}),
-	},
+    -- resize pane
+    {
+        key = "r",
+        mods = "LEADER",
+        action = wezterm.action.ActivateKeyTable({
+            name = "resize_pane",
+            one_shot = false,
+        }),
+    },
 }
 
 config.key_tables = {
-	resize_pane = {
-		{ key = "Escape", action = "PopKeyTable" },
-		{ key = "Enter", action = "PopKeyTable" },
-		{ key = "h", action = wezterm.action.AdjustPaneSize({ "Left", 5 }) },
-		{ key = "l", action = wezterm.action.AdjustPaneSize({ "Right", 5 }) },
-		{ key = "j", action = wezterm.action.AdjustPaneSize({ "Up", 5 }) },
-		{ key = "k", action = wezterm.action.AdjustPaneSize({ "Down", 5 }) },
-		{ key = "LeftArrow", action = wezterm.action.AdjustPaneSize({ "Left", 5 }) },
-		{ key = "RightArrow", action = wezterm.action.AdjustPaneSize({ "Right", 5 }) },
-		{ key = "UpArrow", action = wezterm.action.AdjustPaneSize({ "Up", 5 }) },
-		{ key = "DownArrow", action = wezterm.action.AdjustPaneSize({ "Down", 5 }) },
-	},
+    resize_pane = {
+        { key = "Escape",     action = "PopKeyTable" },
+        { key = "Enter",      action = "PopKeyTable" },
+        { key = "h",          action = wezterm.action.AdjustPaneSize({ "Left", 5 }) },
+        { key = "l",          action = wezterm.action.AdjustPaneSize({ "Right", 5 }) },
+        { key = "j",          action = wezterm.action.AdjustPaneSize({ "Up", 5 }) },
+        { key = "k",          action = wezterm.action.AdjustPaneSize({ "Down", 5 }) },
+        { key = "LeftArrow",  action = wezterm.action.AdjustPaneSize({ "Left", 5 }) },
+        { key = "RightArrow", action = wezterm.action.AdjustPaneSize({ "Right", 5 }) },
+        { key = "UpArrow",    action = wezterm.action.AdjustPaneSize({ "Up", 5 }) },
+        { key = "DownArrow",  action = wezterm.action.AdjustPaneSize({ "Down", 5 }) },
+    },
 }
 
 config.mouse_bindings = {
-	{
-		event = { Drag = { streak = 1, button = "Left" } },
-		mods = "SUPER",
-		action = wezterm.action.StartWindowDrag,
-	},
+    {
+        event = { Drag = { streak = 1, button = "Left" } },
+        mods = "SUPER",
+        action = wezterm.action.StartWindowDrag,
+    },
 }
 
 return config
