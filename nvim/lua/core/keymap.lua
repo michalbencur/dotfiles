@@ -1,5 +1,11 @@
 local map = vim.keymap.set
 
+-- Navigate panes
+map('n', '<M-Left>', '<C-w>h', { desc = 'Move left' })
+map('n', '<M-Down>', '<C-w>j', { desc = 'Move down' })
+map('n', '<M-Up>', '<C-w>k', { desc = 'Move up' })
+map('n', '<M-Right>', '<C-w>l', { desc = 'Move right' })
+
 -- Move Lines
 map('n', '<M-S-Up>', '<Cmd>move -2<CR>', { desc = 'Move line up' })
 map('n', '<M-S-Down>', '<Cmd>move +1<CR>', { desc = 'Move line down' })
@@ -17,4 +23,3 @@ map({ 'n', 'x' }, '<Leader>P', '"+P', { desc = '[P]aste from system clipboard (+
 map('n', '<Leader>q', '<Cmd>copen<CR>', { desc = 'Open [q]uickfix list window' })
 map('n', '<Leader>l', '<Cmd>lopen<CR>', { desc = 'Open [l]ocation list window' })
 map('n', '<Leader>d', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostic quickfix list' })
-
