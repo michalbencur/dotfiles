@@ -206,6 +206,7 @@ PS1='%K{238}%F{blue}%1v%F{green}%2v%F{blue}%(3V$ %3v $%2~ )%(?.%F{green}.%F{red}
 
 # Various
 export EDITOR=nvim
+[ -s ~/.config/zsh/wezterm.sh ] && \. ~/.config/zsh/wezterm.sh
 
 # Bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"

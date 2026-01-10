@@ -22,10 +22,20 @@ local function cursor_fingerprint(pane)
     return (cursor.x << 16) | cursor.y
 end
 
+local function is_nvim(pane)
+    local vars = pane:get_user_vars()
+    local prog = vars['WEZTERM_PROG']
+    wezterm.log_info('prog=', prog)
+    if prog == 'vi' or prog == 'nvim' or prog == 'vim' then
+        return true
+    end
+    return pane:get_foreground_process_name():endswith('nvim')
+end
+
 local function move_pane_action(direction)
     local action = wezterm.action.ActivatePaneDirection(direction)
     return wezterm.action_callback(function(win, pane)
-        if pane:get_foreground_process_name():endswith('nvim') then
+        if is_nvim(pane) then
             local pp = cursor_fingerprint(pane)
             win:perform_action(wezterm.action.SendKey { key = direction .. 'Arrow', mods = 'OPT' }, pane)
             wezterm.sleep_ms(120)
