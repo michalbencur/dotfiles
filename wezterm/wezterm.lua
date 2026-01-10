@@ -24,12 +24,7 @@ end
 
 local function is_nvim(pane)
     local vars = pane:get_user_vars()
-    local prog = vars['WEZTERM_PROG']
-    wezterm.log_info('prog=', prog)
-    if prog == 'vi' or prog == 'nvim' or prog == 'vim' then
-        return true
-    end
-    return pane:get_foreground_process_name():endswith('nvim')
+    return vars['IS_NVIM'] == 'true'
 end
 
 local function move_pane_action(direction)

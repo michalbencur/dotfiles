@@ -8,7 +8,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
--- VimEnter Vim LeavePre
--- printf "\033]1337;SetUserVar=%s=%s\007" IS_NVIM `echo -n true | base64`
--- printf "\033]1337;SetUserVar=IS_NVIM=dHJ1ZQ==\007"
--- printf "\033]1337;SetUserVar=IS_NVIM=ZmFsc2U=\007"
+-- Set Wezterm/Kitty user-var IS_NVIM=true when running and active
+vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {
+    group = vim.api.nvim_create_augroup("IS_NVIM_ON", { clear = true }),
+    callback = function()
+        vim.api.nvim_ui_send("\x1b]1337;SetUserVar=IS_NVIM=dHJ1ZQ==\007")
+    end
+})
+vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+    group = vim.api.nvim_create_augroup("IS_NVIM_OFF", { clear = true }),
+    callback = function()
+        vim.api.nvim_ui_send("\x1b]1337;SetUserVar=IS_NVIM=ZmFsc2U=\007")
+    end
+})
