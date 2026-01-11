@@ -21,6 +21,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 )
             end
 
+            if client:supports_method('textDocument/implementation') then
+                vim.keymap.set({ 'i', 'n' }, '<C-d>',
+                    function()
+                        vim.lsp.buf.implementation()
+                    end
+                )
+            end
+
             if client:supports_method('textDocument/signatureHelp') then
                 vim.keymap.set('n', '<C-s>',
                     function()
