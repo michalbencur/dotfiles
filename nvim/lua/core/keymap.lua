@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
--- Navigate panes
+-- Navigate panes - used by Wezterm
 map('n', '<M-Left>', '<C-w>h', { desc = 'Move left' })
 map('n', '<M-Down>', '<C-w>j', { desc = 'Move down' })
 map('n', '<M-Up>', '<C-w>k', { desc = 'Move up' })
@@ -21,5 +21,17 @@ map({ 'n', 'x' }, '<Leader>P', '"+P', { desc = '[P]aste from system clipboard (+
 
 -- Quickfix/Location List/Diagnostic keymaps
 map('n', '<Leader>q', '<Cmd>copen<CR>', { desc = 'Open [q]uickfix list window' })
-map('n', '<Leader>l', '<Cmd>lopen<CR>', { desc = 'Open [l]ocation list window' })
-map('n', '<Leader>d', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostic quickfix list' })
+map('n', '<Leader>ll', '<Cmd>lopen<CR>', { desc = 'Open [l]ocation list window' })
+map('n', '<Leader>ld', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostic quickfix list' })
+
+vim.keymap.set('n', '<Leader>f', vim.cmd.NvimTreeToggle, { desc = 'NvimTree toggle' })
+vim.keymap.set('n', '<Leader>mm', '<Cmd>Mason<CR>', { desc = 'Open [m]ason [m]enu' })
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<Leader><space>', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<Leader>/', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<Leader>,', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<Leader>h', builtin.help_tags, { desc = 'Telescope help tags' })
+
+vim.keymap.set('n', '<Leader>gg', vim.cmd.LazyGit, { desc = 'LazyGit' })
+vim.keymap.set('n', '<Leader>gc', builtin.git_bcommits, { desc = 'Telescope current buffer commits' })

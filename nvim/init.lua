@@ -1,6 +1,5 @@
 require('core.globals')
 require('core.options')
-require('core.keymap')
 require('core.autocmd')
 require('core.lsp')
 
@@ -13,3 +12,5 @@ require('plugins.nvim-tree')
 require('plugins.lualine')
 require('plugins.lazygit')
 require('plugins.which-key')
+
+require('core.keymap')
