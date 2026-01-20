@@ -173,7 +173,7 @@ alias l='eza --color=always --long --git --no-user'
 alias ll='eza --tree --level=2 --git-ignore --color=always --git --icons=always'
 alias vi='nvim'
 alias n='nvim'
-alias less="bat"
+alias less="bat --style=plain"
 alias killDns='sudo killall -HUP mDNSResponder'
 alias rm='rm -i'
 alias cp='cp -i'
