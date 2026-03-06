@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             end
 
             if client:supports_method('textDocument/implementation') then
-                vim.keymap.set({ 'i', 'n' }, '<C-d>',
+                vim.keymap.set('n', '<Leader>gd',
                     function()
                         vim.lsp.buf.implementation()
                     end
@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             end
 
             if client:supports_method('textDocument/signatureHelp') then
-                vim.keymap.set('n', '<C-s>',
+                vim.keymap.set('n', '<Leader>gh',
                     function()
                         vim.lsp.buf.signature_help()
                     end,
@@ -46,6 +46,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
                     end,
                 })
             end
+
+            vim.keymap.set('n', '<Leader>lf',
+                function()
+                    vim.cmd [[LspTypescriptSourceAction]]
+                end,
+                { desc = "Organize Imports" }
+            )
         end
     end
 })
