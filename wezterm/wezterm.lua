@@ -46,6 +46,7 @@ config.window_background_opacity = 1.0
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 config.native_macos_fullscreen_mode = false
+config.enable_kitty_keyboard = true
 
 config.leader = { key = "p", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
