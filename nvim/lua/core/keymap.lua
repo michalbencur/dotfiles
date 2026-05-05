@@ -38,26 +38,5 @@ vim.keymap.set('n', '<Leader>gc', builtin.git_bcommits, { desc = 'Telescope curr
 
 -- Custom
 vim.keymap.set('n', '<Leader>j', function()
-    local location = vim.api.nvim_win_get_cursor(0)
-    if vim.treesitter.get_parser(nil, nil, { error = false }) then
-        require 'vim.treesitter._select'.select_child(vim.v.count1)
-    else
-        vim.lsp.buf.selection_range(-vim.v.count1)
-    end
-    vim.cmd([[noau normal! "vy]])
-    local oldEncrypted = vim.fn.getreg("v")
-    local output = vim.fn.systemlist("node ~/Desktop/replace-jasypt/reencrypt.mjs " .. oldEncrypted)
-    if output == nil then
-        vim.notify("Invalid JASYPT", vim.log.levels.ERROR)
-    else
-        local encrypted = table.concat(output, "\n")
-        if encrypted:len() < 2 then
-            vim.notify("Invalid JASYPT2", vim.log.levels.ERROR)
-        else
-            vim.notify("Converted JASYPT", vim.log.levels.INFO)
-            vim.cmd(":%s$" .. oldEncrypted .. "$" .. encrypted .. "$g\n")
-            vim.api.nvim_win_set_cursor(0, location)
-            vim.cmd("norm! j")
-        end
-    end
+    vim.cmd.ReplacerRun('node ~/Desktop/replace-jasypt/reencrypt.mjs')
 end, { desc = "Jasypt re-encrypt" })

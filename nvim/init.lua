@@ -15,4 +15,6 @@ require('plugins.which-key')
 require('plugins.fidget')
 require('plugins.gitsigns')
 
+require('plugins.replacer')
+
 require('core.keymap')
