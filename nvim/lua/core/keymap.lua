@@ -57,6 +57,7 @@ vim.keymap.set('n', '<Leader>j', function()
             vim.notify("Converted JASYPT", vim.log.levels.INFO)
             vim.cmd(":%s$" .. oldEncrypted .. "$" .. encrypted .. "$g\n")
             vim.api.nvim_win_set_cursor(0, location)
+            vim.cmd("norm! j")
         end
     end
 end, { desc = "Jasypt re-encrypt" })

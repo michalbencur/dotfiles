@@ -17,6 +17,14 @@ require("nvim-treesitter.configs").setup({
     indent = {
         enable = true,
     },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            node_incremental = "v",
+            node_decremental = "V",
+        },
+    },
+
 })
 
 vim.api.nvim_create_autocmd('PackChanged', {
