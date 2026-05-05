@@ -12,5 +12,6 @@ require('plugins.nvim-tree')
 require('plugins.lualine')
 require('plugins.lazygit')
 require('plugins.which-key')
+require('plugins.fidget')
 
 require('core.keymap')
