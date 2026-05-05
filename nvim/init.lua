@@ -13,5 +13,6 @@ require('plugins.lualine')
 require('plugins.lazygit')
 require('plugins.which-key')
 require('plugins.fidget')
+require('plugins.gitsigns')
 
 require('core.keymap')
