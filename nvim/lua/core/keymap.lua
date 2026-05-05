@@ -35,3 +35,27 @@ vim.keymap.set('n', '<Leader>h', builtin.help_tags, { desc = 'Telescope help tag
 
 vim.keymap.set('n', '<Leader>gg', vim.cmd.LazyGit, { desc = 'LazyGit' })
 vim.keymap.set('n', '<Leader>gc', builtin.git_bcommits, { desc = 'Telescope current buffer commits' })
+
+-- Custom
+vim.keymap.set('n', '<Leader>j', function()
+    -- vim.lsp.buf.selection_range('inner')
+    if vim.treesitter.get_parser(nil, nil, { error = false }) then
+        require 'vim.treesitter._select'.select_child(vim.v.count1)
+    else
+        vim.lsp.buf.selection_range(-vim.v.count1)
+    end
+    vim.cmd([[noau normal! "vy]])
+    local oldEncrypted = vim.fn.getreg("v")
+    local output = vim.fn.systemlist("node ~/Desktop/replace-jasypt/reencrypt.mjs " .. oldEncrypted)
+    if output == nil then
+        vim.notify("Invalid JASYPT", vim.log.levels.ERROR)
+    else
+        local encrypted = table.concat(output, "\n")
+        if encrypted:len() < 2 then
+            vim.notify("Invalid JASYPT2", vim.log.levels.ERROR)
+        else
+            vim.print("### encrypted=" .. encrypted .. " old=" .. oldEncrypted)
+            vim.cmd(":%s$" .. oldEncrypted .. "$" .. encrypted .. "$g\n")
+        end
+    end
+end, { desc = "Jasypt re-encrypt" })

@@ -20,6 +20,10 @@
       "rev": "0b38bc74487e73489624d61396af7805af9cc75f",
       "src": "https://github.com/neovim/nvim-lspconfig.git"
     },
+    "nvim-notify": {
+      "rev": "8701bece920b38ea289b457f902e2ad184131a5d",
+      "src": "https://github.com/rcarriga/nvim-notify"
+    },
     "nvim-tree.lua": {
       "rev": "b8b44b6a2494d086a9177251a119f9daec6cace8",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"

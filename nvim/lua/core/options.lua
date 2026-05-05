@@ -17,3 +17,4 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.undofile = true
 vim.opt.winborder = 'rounded'
+vim.opt.termguicolors = true
