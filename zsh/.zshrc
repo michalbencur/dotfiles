@@ -208,6 +208,8 @@ PS1='%K{238}%F{blue}%1v%F{green}%2v%F{blue}%(3V$ %3v $%2~ )%(?.%F{green}.%F{red}
 export EDITOR=nvim
 [ -s ~/.config/zsh/wezterm.sh ] && \. ~/.config/zsh/wezterm.sh
 
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 # Bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
@@ -217,6 +219,12 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# fnm
+if command -v bat &>/dev/null
+then
+    eval "$(fnm env --use-on-cd --shell zsh)"
+fi
 
 # OpenCode
 export PATH=$HOME/.opencode/bin:$PATH
