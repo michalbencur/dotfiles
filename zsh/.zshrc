@@ -201,8 +201,13 @@ vcs_precmd() {
         PSVAR=""
     fi
 }
+ps1_host() {
+    if [[ -n "$SSH_CONNECTION" ]]; then
+        print "[$HOST] "
+    fi
+}
 add-zsh-hook precmd vcs_precmd
-PS1='%K{238}%F{blue}%1v%F{green}%2v%F{blue}%(3V$ %3v $%2~ )%(?.%F{green}.%F{red})%#%k%f%F{238}%f '
+PS1='%K{238}$(ps1_host)%F{blue}%1v%F{green}%2v%F{blue}%(3V$ %3v $%2~ )%(?.%F{green}.%F{red})%#%k%f%F{238}%f '
 
 # Various
 export EDITOR=nvim
