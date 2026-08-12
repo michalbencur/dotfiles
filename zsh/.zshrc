@@ -234,5 +234,8 @@ fi
 # OpenCode
 export PATH=$HOME/.opencode/bin:$PATH
 
+# .local (Claude Code)
+export PATH=$HOME/.local/bin:$PATH
+
 # Cloudev
 [ -s ~/.zshrc-cloudev ] && \. ~/.zshrc-cloudev
