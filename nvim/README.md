@@ -1,4 +1,6 @@
-# 💤 LazyVim
+# Neovim config
 
-A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+brew install vscode-langservers-extracted bash-language-server typescript-language-server yaml-language-server
+
+:TSInstall astro
+

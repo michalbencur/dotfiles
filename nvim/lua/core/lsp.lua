@@ -1,8 +1,11 @@
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('ts_ls')
-vim.lsp.enable('java_language_server')
-vim.lsp.enable('jsonls')
-vim.lsp.enable('yamlls')
+vim.lsp.enable('bashls.lua')
+vim.lsp.enable('html.lua')
+vim.lsp.enable('java_language_server.lua')
+vim.lsp.enable("jdtls")
+vim.lsp.enable('jsonls.lua')
+vim.lsp.enable('lua_ls.lua')
+vim.lsp.enable('ts_ls.lua')
+vim.lsp.enable('yamlls.lua')
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
