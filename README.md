@@ -7,9 +7,11 @@ brew install --cask wezterm
 
 ### shell packages
 
-brew install neovim eza ripgrep fzf zoxide lazygit bat
+brew install neovim eza fd ripgrep fzf zoxide lazygit bat
 
 #### Linux
+
+apt-get install neovim eza fd-find ripgrep fzf zoxide lazygit bat
 
 pacman -Syu ... packages ...
 

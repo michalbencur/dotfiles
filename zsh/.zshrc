@@ -173,7 +173,6 @@ alias l='eza --color=always --long --git --no-user'
 alias ll='eza --tree --level=2 --git-ignore --color=always --git --icons=always'
 alias vi='nvim'
 alias n='nvim'
-alias less="bat --style=plain"
 alias killDns='sudo killall -HUP mDNSResponder'
 alias rm='rm -i'
 alias cp='cp -i'
@@ -225,8 +224,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# fnm
+# bat (less alt, different command on MacOS/Linux)
 if command -v bat &>/dev/null
+then 
+    alias less="bat --style=plain"
+elif command -v batcat &>/dev/null
+then
+    alias less="batcat --style=plain"
+fi
+
+# fnm
+if command -v fnm &>/dev/null
 then
     eval "$(fnm env --use-on-cd --shell zsh)"
 fi
