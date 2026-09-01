@@ -6,6 +6,10 @@ if [[ -f "/opt/homebrew/bin/brew" ]] then
   # brew install zellij nvim eza fd fzf lazygit zoxide
 fi
 
+if command -v mise &>/dev/null; then
+    eval "$(mise activate zsh)"
+fi
+
 autoload -Uz compinit && compinit
 
 # Keybindings
@@ -175,16 +179,8 @@ alias killDns='sudo killall -HUP mDNSResponder'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-
-
-if command -v nvim &>/dev/null
-then 
-    alias vi='nvim'
-    alias n='nvim'
-else
-    alias vi="neovim"
-    alias n='neovim'
-fi
+alias vi='nvim'
+alias n='nvim'
 
 # Shell integrations
 eval "$(fzf --zsh)"
