@@ -1,3 +1,6 @@
+# .local (Mise, Claude Code)
+export PATH=$HOME/.local/bin:$PATH
+
 if [[ -f "/opt/homebrew/bin/brew" ]] then
   # If you're using macOS, you'll want this enabled
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -246,8 +249,5 @@ fi
 # OpenCode
 export PATH=$HOME/.opencode/bin:$PATH
 
-# .local (Claude Code)
-export PATH=$HOME/.local/bin:$PATH
-
-# Cloudev
+ Cloudev
 [ -s ~/.zshrc-cloudev ] && \. ~/.zshrc-cloudev
