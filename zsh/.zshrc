@@ -171,12 +171,20 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='eza --color=always'
 alias l='eza --color=always --long --git --no-user'
 alias ll='eza --tree --level=2 --git-ignore --color=always --git --icons=always'
-alias vi='nvim'
-alias n='nvim'
 alias killDns='sudo killall -HUP mDNSResponder'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
+
+if command -v nvim &>/dev/null
+then 
+    alias vi='nvim'
+    alias n='nvim'
+else
+    alias vi="neovim"
+    alias n='neovim'
+fi
 
 # Shell integrations
 eval "$(fzf --zsh)"
