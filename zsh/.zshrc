@@ -13,6 +13,10 @@ if command -v mise &>/dev/null; then
     eval "$(mise activate zsh)"
 fi
 
+if command -v kubectl &>/dev/null; then
+    source <(kubectl completion zsh)
+fi
+
 autoload -Uz compinit && compinit
 
 # Keybindings
@@ -238,6 +242,12 @@ then
 elif command -v batcat &>/dev/null
 then
     alias less="batcat --style=plain"
+fi
+
+# fd on Ubuntu is called fdfind
+if command -v fdfind &>/dev/null
+then
+    alias fd="fdfind"
 fi
 
 # fnm

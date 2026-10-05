@@ -2,7 +2,7 @@
 
 ### terminal
 
-brew install --cask wezterm
+brew install --cask wezterm ghostty
 
 
 ### shell packages
