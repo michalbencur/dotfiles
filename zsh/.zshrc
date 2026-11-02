@@ -259,5 +259,5 @@ fi
 # OpenCode
 export PATH=$HOME/.opencode/bin:$PATH
 
-# Cloudev
-[ -s ~/.zshrc-cloudev ] && \. ~/.zshrc-cloudev
+# Local
+[ -s ~/.zshrc-local ] && \. ~/.zshrc-local
