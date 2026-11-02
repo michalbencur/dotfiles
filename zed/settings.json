@@ -8,6 +8,7 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "project_panel": {
+    "hide_hidden": false,
     "dock": "left"
   },
   "agent": {
@@ -20,7 +21,7 @@
   "session": {
     "trust_all_worktrees": true
   },
-  "vim_mode": true,
+  "vim_mode": false,
   "agent_servers": {
     "claude-acp": {
       "type": "registry"

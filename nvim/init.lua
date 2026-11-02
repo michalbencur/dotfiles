@@ -16,5 +16,6 @@ require('plugins.fidget')
 require('plugins.gitsigns')
 
 require('plugins.replacer')
+require('plugins.jasypt')
 
 require('core.keymap')

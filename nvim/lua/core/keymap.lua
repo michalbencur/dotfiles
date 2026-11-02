@@ -37,6 +37,5 @@ vim.keymap.set('n', '<Leader>gg', vim.cmd.LazyGit, { desc = 'LazyGit' })
 vim.keymap.set('n', '<Leader>gc', builtin.git_bcommits, { desc = 'Telescope current buffer commits' })
 
 -- Custom
-vim.keymap.set('n', '<Leader>j', function()
-    vim.cmd.ReplacerRun('node ~/Desktop/replace-jasypt/reencrypt.mjs')
-end, { desc = "Jasypt re-encrypt" })
+vim.keymap.set("x", "<leader>je", "<Plug>(JasyptEncrypt)")
+vim.keymap.set("x", "<leader>jd", "<Plug>(JasyptDecrypt)")
